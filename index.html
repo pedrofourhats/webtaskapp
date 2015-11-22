@@ -40,7 +40,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script>
-    var flags = [], i, emailCountArray = [];
+    google.load('visualization', '1', {packages: ['corechart', 'bar']});
+    var flags = [], i;
       $.get(
         "https://webtask.it.auth0.com/api/run/wt-pedroalessandri-gmail_com-0/listmails?webtask_no_cache=1",
         function(data) {
@@ -59,20 +60,28 @@
             
             Object.keys(flags).forEach(function (key) {
                //alert(key + ' ' + flags[key]);
-               emailCountArray[] = ['Email', 'Sent Email amount'];
-              emailCountArray[] = ['Los Angeles, CA', 4];
-              emailCountArray[] = ['New York City, NY', 3];
+
 
     
           
             });
-            
+                var emailCountArray = new google.visualization.DataTable();
+    
+    // Declare columns
+    emailCountArray.addColumn('string', 'Email');
+    emailCountArray.addColumn('integer', 'Amount');
+    
+    // Add data.
+    emailCountArray.addRows(['Los Angeles, CA', 4]);
+    emailCountArray.addRows(['New York City, NY', 3]);
             google.setOnLoadCallback(drawAxisTickColors);
           }
         );
 
 
-    google.load('visualization', '1', {packages: ['corechart', 'bar']});
+
+
+    
     
     
     function drawAxisTickColors() {
