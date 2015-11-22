@@ -43,8 +43,8 @@
       $.get(
         "https://webtask.it.auth0.com/api/run/wt-pedroalessandri-gmail_com-0/listmails?webtask_no_cache=1",
         function(data) {
-           var flags = [], output = [], l = data.length, i;
-            for( i=0; i<l; i++) {
+           var flags = [], i;
+            for( i=0; i<data.length; i++) {
                 if( flags[data[i]["email"]["sender"]] >= 1){
             		flags[data[i]["email"]["sender"]]++;
             	}
@@ -55,10 +55,12 @@
                 
                 
             }
-        alert(JSON.stringify(Object.keys(flags)));
+        
         }
     );
-    
+    flags.forEach(function(email) {
+      alert(Object.key(email));
+    });
     google.load('visualization', '1', {packages: ['corechart', 'bar']});
     google.setOnLoadCallback(drawAxisTickColors);
     
