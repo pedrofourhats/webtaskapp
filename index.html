@@ -72,20 +72,12 @@
     
     
     function drawAxisTickColors() {
-       var emailCountArray = new google.visualization.DataTable();
-              emailData.addColumn('string', 'Email');
-    emailData.addColumn('number', 'Amount');
-    
-    // Add data.
-    emailData.addRow(['Los Angeles, CA', 4]);
-    emailData.addRow(['New York City, NY', 3]);
-               Object.keys(flags).forEach(function (key) {
-               alert(key + ' ' + flags[key]);
+       var data = google.visualization.arrayToDataTable([
+        ['City', '2010 Population'],
+        ['New York City, NY', 8175000],
+        ['Los Angeles, CA', 3792000],
 
-
-    
-          
-            });
+      ]);
           var options = {
             title: 'Population of Largest U.S. Cities',
             chartArea: {width: '50%'},
@@ -118,7 +110,7 @@
             }
           };
           var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-          chart.draw(emailCountArray, options);
+          chart.draw(data, options);
         }
       
     </script>
