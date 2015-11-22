@@ -54,6 +54,9 @@
             		flags[data[i]["email"]["sender"]] = 1;
             	}
             }
+          Object.keys(flags).forEach(function (key) {
+                alert(key + ' ' + flags[key]);
+           });
           }
         );
 
