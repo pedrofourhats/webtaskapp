@@ -44,7 +44,7 @@
         "https://webtask.it.auth0.com/api/run/wt-pedroalessandri-gmail_com-0/listmails?webtask_no_cache=1",
         function(data) {
            data.forEach(function(entry) {
-            alert(entry["email"]["date"]);
+            alert(entry["email"]["sender"]);
             });
 
         }
