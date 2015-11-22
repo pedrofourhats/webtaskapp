@@ -1,1 +1,14 @@
 <h1>hello</h1>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script>
+  $.get(
+    "https://webtask.it.auth0.com/api/run/wt-pedroalessandri-gmail_com-0/listmails?webtask_no_cache=1",
+    function(data) {
+       alert('page content: ' + data);
+    }
+);
+  
+</script>
+
+
