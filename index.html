@@ -40,10 +40,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script>
+    var flags = [], i;
       $.get(
         "https://webtask.it.auth0.com/api/run/wt-pedroalessandri-gmail_com-0/listmails?webtask_no_cache=1",
         function(data) {
-           var flags = [], i;
+           
             for( i=0; i<data.length; i++) {
                 if( flags[data[i]["email"]["sender"]] >= 1){
             		flags[data[i]["email"]["sender"]]++;
@@ -55,11 +56,11 @@
                 
                 
             }
-            Object.keys(flags).forEach(function (key) {
-               alert(key + ' ' + flags[key]);
-            });
-        }
-    );
+          }
+        );
+    Object.keys(flags).forEach(function (key) {
+       alert(key + ' ' + flags[key]);
+    });
 
     google.load('visualization', '1', {packages: ['corechart', 'bar']});
     google.setOnLoadCallback(drawAxisTickColors);
