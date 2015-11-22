@@ -40,42 +40,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script>
-    
-    var flags = [], i;
-      $.get(
-        "https://webtask.it.auth0.com/api/run/wt-pedroalessandri-gmail_com-0/listmails?webtask_no_cache=1",
-        function(data) {
-            for( i=0; i<data.length; i++) {
-                if( flags[data[i]["email"]["sender"]] >= 1){
-            		flags[data[i]["email"]["sender"]]++;
-            	}
-            	else
-            	{
-            		flags[data[i]["email"]["sender"]] = 1;
-            	}
-            }
-          Object.keys(flags).forEach(function (key) {
-                alert(key + ' ' + flags[key]);
-           });
-           google.setOnLoadCallback(drawAxisTickColors);
-          }
-        );
-
-
-
- google.load('visualization', '1', {packages: ['corechart', 'bar']});
-            
-    
-    
-    
-    function drawAxisTickColors() {
-       var data = google.visualization.arrayToDataTable([
+     google.load('visualization', '1', {packages: ['corechart', 'bar']});
+     
+     
+    var data = google.visualization.arrayToDataTable([
         ['City', '2010 Population'],
         ['New York City, NY', 8175000],
         ['Los Angeles, CA', 3792000],
 
       ]);
-          var options = {
+      var options = {
             title: 'Population of Largest U.S. Cities',
             chartArea: {width: '50%'},
             hAxis: {
@@ -107,8 +81,33 @@
             }
           };
           var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-          chart.draw(data, options);
-        }
+          
+          google.setOnLoadCallback(chart.draw(data, options));
+    var flags = [], i;
+      $.get(
+        "https://webtask.it.auth0.com/api/run/wt-pedroalessandri-gmail_com-0/listmails?webtask_no_cache=1",
+        function(data) {
+            for( i=0; i<data.length; i++) {
+                if( flags[data[i]["email"]["sender"]] >= 1){
+            		flags[data[i]["email"]["sender"]]++;
+            	}
+            	else
+            	{
+            		flags[data[i]["email"]["sender"]] = 1;
+            	}
+            }
+          Object.keys(flags).forEach(function (key) {
+                alert(key + ' ' + flags[key]);
+           });
+           
+          }
+        );
+
+
+
+
+            
+}
       
     </script>
   </body>
