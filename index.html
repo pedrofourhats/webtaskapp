@@ -43,10 +43,19 @@
       $.get(
         "https://webtask.it.auth0.com/api/run/wt-pedroalessandri-gmail_com-0/listmails?webtask_no_cache=1",
         function(data) {
-           data.forEach(function(entry) {
-            alert(entry["email"]["sender"]);
-            });
-
+           var flags = [], output = [], l = data.length, i;
+            for( i=0; i<l; i++) {
+                if( flags[data[i]["email"]["sender"]] >= 1){
+            		flags[data[i]["email"]["sender"]]++;
+            	}
+            	else
+            	{
+            		flags[data[i]["email"]["sender"]] = 1;
+            	}
+                
+                
+            }
+        alert(JSON.stringify(Object.keys(flags)));
         }
     );
     
