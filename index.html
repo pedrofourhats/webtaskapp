@@ -57,13 +57,14 @@
           Object.keys(flags).forEach(function (key) {
                 alert(key + ' ' + flags[key]);
            });
+           google.setOnLoadCallback(drawAxisTickColors);
           }
         );
 
 
 
  google.load('visualization', '1', {packages: ['corechart', 'bar']});
-            google.setOnLoadCallback(drawAxisTickColors);
+            
     
     
     
