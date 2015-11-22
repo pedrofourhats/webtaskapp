@@ -29,7 +29,13 @@
       <div class="starter-template">
         <h1>Pedro's Gmail stadistics</h1>
         <p class="lead">This little app was done by using webtasks (node + mongodb), gcharts and ITTT. <br> Hope you enjoy it ;)</p>
-        <div id="chart_div"></div>
+        <table id="results" class="table">
+          <tr>
+              <td>Email sender</td>
+              <td>Email sent</td>
+          </tr>
+          
+        </table>
       
       </div>
 
@@ -40,49 +46,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script>
-     google.load('visualization', '1', {packages: ['corechart', 'bar']});
      
-     
-    var data = google.visualization.arrayToDataTable([
-        ['City', '2010 Population'],
-        ['New York City, NY', 8175000],
-        ['Los Angeles, CA', 3792000],
-
-      ]);
-      var options = {
-            title: 'Population of Largest U.S. Cities',
-            chartArea: {width: '50%'},
-            hAxis: {
-              title: 'Total Population',
-              minValue: 0,
-              textStyle: {
-                bold: true,
-                fontSize: 12,
-                color: '#4d4d4d'
-              },
-              titleTextStyle: {
-                bold: true,
-                fontSize: 18,
-                color: '#4d4d4d'
-              }
-            },
-            vAxis: {
-              title: 'City',
-              textStyle: {
-                fontSize: 14,
-                bold: true,
-                color: '#848484'
-              },
-              titleTextStyle: {
-                fontSize: 14,
-                bold: true,
-                color: '#848484'
-              }
-            }
-          };
-          var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-          
-          google.setOnLoadCallback(chart.draw(data, options));
     var flags = [], i;
       $.get(
         "https://webtask.it.auth0.com/api/run/wt-pedroalessandri-gmail_com-0/listmails?webtask_no_cache=1",
@@ -97,7 +61,7 @@
             	}
             }
           Object.keys(flags).forEach(function (key) {
-                alert(key + ' ' + flags[key]);
+                $("#results").append('<tr><td>' + key + '</td><td>' + flags[key] + '</td></tr>');
            });
            
           }
