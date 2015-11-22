@@ -55,12 +55,12 @@
                 
                 
             }
-        
+            Object.keys(flags).forEach(function (key) {
+               alert(key + ' ' + flags[key]);
+            });
         }
     );
-    flags.forEach(function(email) {
-      alert(Object.key(email));
-    });
+
     google.load('visualization', '1', {packages: ['corechart', 'bar']});
     google.setOnLoadCallback(drawAxisTickColors);
     
