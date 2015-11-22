@@ -40,7 +40,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script>
-    google.load('visualization', '1', {packages: ['corechart', 'bar']});
+    
     var flags = [], i;
       $.get(
         "https://webtask.it.auth0.com/api/run/wt-pedroalessandri-gmail_com-0/listmails?webtask_no_cache=1",
@@ -58,22 +58,9 @@
                 
             }
             
-            //Object.keys(flags).forEach(function (key) {
-               //alert(key + ' ' + flags[key]);
-
-
+             
     
-          
-            //});
-                var emailCountArray = new google.visualization.DataTable();
-    
-    // Declare columns
-    emailCountArray.addColumn('string', 'Email');
-    emailCountArray.addColumn('number', 'Amount');
-    
-    // Add data.
-    emailCountArray.addRow(['Los Angeles, CA', 4]);
-    emailCountArray.addRow(['New York City, NY', 3]);
+            google.load('visualization', '1', {packages: ['corechart', 'bar']});
             google.setOnLoadCallback(drawAxisTickColors);
           }
         );
@@ -85,8 +72,20 @@
     
     
     function drawAxisTickColors() {
-          
+       var emailCountArray = new google.visualization.DataTable();
+              emailData.addColumn('string', 'Email');
+    emailData.addColumn('number', 'Amount');
     
+    // Add data.
+    emailData.addRow(['Los Angeles, CA', 4]);
+    emailData.addRow(['New York City, NY', 3]);
+               Object.keys(flags).forEach(function (key) {
+               alert(key + ' ' + flags[key]);
+
+
+    
+          
+            });
           var options = {
             title: 'Population of Largest U.S. Cities',
             chartArea: {width: '50%'},
