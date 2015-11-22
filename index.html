@@ -56,11 +56,13 @@
                 
                 
             }
-          }
-        );
-    Object.keys(flags).forEach(function (key) {
+            
+                Object.keys(flags).forEach(function (key) {
        alert(key + ' ' + flags[key]);
     });
+          }
+        );
+
 
     google.load('visualization', '1', {packages: ['corechart', 'bar']});
     google.setOnLoadCallback(drawAxisTickColors);
