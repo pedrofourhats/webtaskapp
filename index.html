@@ -40,7 +40,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script>
-    var flags = [], i;
+    var flags = [], i, emailCountArray = [];
       $.get(
         "https://webtask.it.auth0.com/api/run/wt-pedroalessandri-gmail_com-0/listmails?webtask_no_cache=1",
         function(data) {
@@ -57,23 +57,26 @@
                 
             }
             
-                Object.keys(flags).forEach(function (key) {
-       alert(key + ' ' + flags[key]);
-    });
+            Object.keys(flags).forEach(function (key) {
+               //alert(key + ' ' + flags[key]);
+               emailCountArray[] = ['Email', 'Sent Email amount'];
+              emailCountArray[] = ['Los Angeles, CA', 4];
+              emailCountArray[] = ['New York City, NY', 3];
+
+    
+          
+            });
+            
+            google.setOnLoadCallback(drawAxisTickColors);
           }
         );
 
 
     google.load('visualization', '1', {packages: ['corechart', 'bar']});
-    google.setOnLoadCallback(drawAxisTickColors);
+    
     
     function drawAxisTickColors() {
-          var data = google.visualization.arrayToDataTable([
-            ['Email', 'Sent Email amount'],
-            ['New York City, NY', 3],
-            ['Los Angeles, CA', 4],
-    
-          ]);
+          var data = google.visualization.arrayToDataTable(emailCountArray);
     
           var options = {
             title: 'Population of Largest U.S. Cities',
