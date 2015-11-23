@@ -22,10 +22,10 @@ module.exports = function (ctx, done) {
 var insertDocument = function(db, callback) {
    db.collection('mails').insertOne( {
       "email" : {
-         "date" : mm+'/'+dd+'/'+yyyy,
-		 "hour": today.getHours(),
-         "subject" : ctx.data.subject,
-		 "sender" : ctx.data.sender,
+		"date" : mm+'/'+dd+'/'+yyyy,
+		"hour": today.getHours(),
+		"subject" : ctx.data.subject,
+		"sender" : ctx.data.sender,
       }
    }, function(err, result) {
     assert.equal(err, null);
@@ -37,7 +37,7 @@ var insertDocument = function(db, callback) {
 MongoClient.connect(url, function(err, db) {
   assert.equal(null, err);
   insertDocument(db, function() {
-      db.close();
+  db.close();
   });
 });
 };
