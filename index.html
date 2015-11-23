@@ -70,15 +70,15 @@
           
           Object.keys(flags).forEach(function (key) {
                 $("#results").append('<tr><td>' + key + '</td><td>' + flags[key] + '</td></tr>');
-                emailSender[] = key;
-                emailCount[] = flags[key];
+                emailSender.push(key);
+                emailCount.push(flags[key]);
            });
           
           var data = {
           labels: emailSender,
           datasets: [
               {
-                  label: "My First dataset",
+                  label: "Emails Chart",
                   fillColor: "rgba(220,220,220,0.2)",
                   strokeColor: "rgba(220,220,220,1)",
                   pointColor: "rgba(220,220,220,1)",
