@@ -36,6 +36,10 @@
           </tr>
           
         </table>
+        
+<canvas id="myChart" width="400" height="400"></canvas>
+
+
       
       </div>
 
@@ -44,9 +48,29 @@
 
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="Chart.js"></script>
     <script>
-     
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var data = {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [65, 59, 80, 81, 56, 55, 40]
+            }
+        ]
+    };
+    
+    var myNewChart = new Chart(ctx).Bar(data);
+    
+    </script>
+    <script>
     var flags = [], i;
       $.get(
         "https://webtask.it.auth0.com/api/run/wt-pedroalessandri-gmail_com-0/listmails?webtask_no_cache=1",
