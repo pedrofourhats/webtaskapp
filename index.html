@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+
+    <title>Webtask App by Pedro</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <div class="starter-template">
+        <div id="foo"></div>
+        <h1>Pedro's Gmail stadistics</h1>
+        <p class="lead">This little app was done by using webtasks (node + mongodb), gcharts and ITTT. <br> Hope you enjoy it ;)</p>
+        <table id="results" class="table">
+          <tr>
+              <td>Email sender</td>
+              <td>Email sent</td>
+          </tr>
+          
+        </table>
+        
+        <canvas id="myChart" style="width: 100; height: 400px;"></canvas>
+
+
+      
+      </div>
+
+    </div><!-- /.container -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.js"></script>
+
+    <script>
+    var flags = [], i, emailSender = [], emailCount = [];
+    var opts = {
+      lines: 13 // The number of lines to draw
+    , length: 28 // The length of each line
+    , width: 14 // The line thickness
+    , radius: 42 // The radius of the inner circle
+    , scale: 1 // Scales overall size of the spinner
+    , corners: 1 // Corner roundness (0..1)
+    , color: '#000' // #rgb or #rrggbb or array of colors
+    , opacity: 0.25 // Opacity of the lines
+    , rotate: 0 // The rotation offset
+    , direction: 1 // 1: clockwise, -1: counterclockwise
+    , speed: 1 // Rounds per second
+    , trail: 60 // Afterglow percentage
+    , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+    , zIndex: 2e9 // The z-index (defaults to 2000000000)
+    , className: 'spinner' // The CSS class to assign to the spinner
+    , top: '50%' // Top position relative to parent
+    , left: '50%' // Left position relative to parent
+    , shadow: false // Whether to render a shadow
+    , hwaccel: false // Whether to use hardware acceleration
+    , position: 'absolute' // Element positioning
+    }
+    var target = document.getElementById('foo')
+    var spinner = new Spinner(opts).spin(target);
+      $.get(
+        "https://webtask.it.auth0.com/api/run/wt-pedroalessandri-gmail_com-0/listmails?webtask_no_cache=1",
+        function(data) {
+            for( i=0; i<data.length; i++) {
+                if( flags[data[i]["email"]["sender"]] >= 1){
+            		flags[data[i]["email"]["sender"]]++;
+            	}
+            	else
+            	{
+            		flags[data[i]["email"]["sender"]] = 1;
+            	}
+            }
+          
+          Object.keys(flags).forEach(function (key) {
+                $("#results").append('<tr><td>' + key + '</td><td>' + flags[key] + '</td></tr>');
+                emailSender.push(key);
+                emailCount.push(flags[key]);
+           });
+          
+          var data = {
+          labels: emailSender,
+          datasets: [
+              {
+                  label: "Emails Chart",
+                  fillColor: "rgba(220,220,220,0.2)",
+                  strokeColor: "rgba(220,220,220,1)",
+                  pointColor: "rgba(220,220,220,1)",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(220,220,220,1)",
+                  data: emailCount
+              }
+                ]
+            };
+            var ctx = document.getElementById("myChart").getContext("2d");
+          var myNewChart = new Chart(ctx).Bar(data);
+          spinner.stop() ;
+          }
+        );
+    </script>
+  </body>
+</html>
