@@ -27,6 +27,7 @@
     <div class="container">
 
       <div class="starter-template">
+        <div id="foo"></div>
         <h1>Pedro's Gmail stadistics</h1>
         <p class="lead">This little app was done by using webtasks (node + mongodb), gcharts and ITTT. <br> Hope you enjoy it ;)</p>
         <table id="results" class="table">
@@ -49,12 +50,34 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="Chart.js"></script>
-    <script>
-    var ctx = document.getElementById("myChart").getContext("2d");
+    <script src="Spin.js"></script>
 
-    </script>
     <script>
     var flags = [], i, emailSender = [], emailCount = [];
+    var opts = {
+      lines: 13 // The number of lines to draw
+    , length: 28 // The length of each line
+    , width: 14 // The line thickness
+    , radius: 42 // The radius of the inner circle
+    , scale: 1 // Scales overall size of the spinner
+    , corners: 1 // Corner roundness (0..1)
+    , color: '#000' // #rgb or #rrggbb or array of colors
+    , opacity: 0.25 // Opacity of the lines
+    , rotate: 0 // The rotation offset
+    , direction: 1 // 1: clockwise, -1: counterclockwise
+    , speed: 1 // Rounds per second
+    , trail: 60 // Afterglow percentage
+    , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+    , zIndex: 2e9 // The z-index (defaults to 2000000000)
+    , className: 'spinner' // The CSS class to assign to the spinner
+    , top: '50%' // Top position relative to parent
+    , left: '50%' // Left position relative to parent
+    , shadow: false // Whether to render a shadow
+    , hwaccel: false // Whether to use hardware acceleration
+    , position: 'absolute' // Element positioning
+    }
+    var target = document.getElementById('foo')
+    var spinner = new Spinner(opts).spin(target);
       $.get(
         "https://webtask.it.auth0.com/api/run/wt-pedroalessandri-gmail_com-0/listmails?webtask_no_cache=1",
         function(data) {
